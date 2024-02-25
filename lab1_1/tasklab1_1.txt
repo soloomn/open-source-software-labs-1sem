@@ -1,0 +1,1 @@
+1. Write a program based on the QDialog class that solves a quadratic equation of the form a⋅x^2+b⋅x+c=0 for any a, b, c (the program must have 6 branches).
