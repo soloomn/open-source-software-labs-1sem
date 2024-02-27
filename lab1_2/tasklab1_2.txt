@@ -1,0 +1,1 @@
+2. Write a program based on the QWidget class that solves a system of two linear equations.
