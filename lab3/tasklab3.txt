@@ -1,0 +1,1 @@
+3. Write a program that reads the lengths of the sides of a triangle, checks if the triangle can be constructed, and finds all the bisectors of the triangle. Solve the problem using a function that calculates the length of a single bisector. Output the results using listWidget.
