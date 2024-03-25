@@ -1,0 +1,1 @@
+From two lines entered from the keyboard, consisting only of words written in Latin letters, separated by commas and spaces (with checking the correctness of the input), create a third line, which must contain characters that are present simultaneously in both original lines.Each character must be included only once in the resulting string
