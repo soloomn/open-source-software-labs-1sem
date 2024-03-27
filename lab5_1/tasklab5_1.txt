@@ -1,0 +1,1 @@
+Create a program that reads text from a file and displays it in the main window; use a resource file.
