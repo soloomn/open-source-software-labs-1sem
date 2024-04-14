@@ -9,33 +9,33 @@ Dialog::Dialog(QWidget *parent)
     ui->setupUi(this);
     QString a,b;
     QRegExp reg(("[a-zA-Z, ]+"));
-    // регулярное выражение, описывающее набор допустимых символов
+    // regular expression describing a set of valid characters
     QRegExpValidator* valid = new QRegExpValidator(reg, this);
-    // объявляем указатель на объект валидатор, использующий регулярное выражение
-    ui->lineEdit->setValidator(valid); /* устанавливаем валидатор для элемента lineEdit, предназначенного для ввода исходных данных */
+    // declare a pointer to a validator object that uses a regular expression
+    ui->lineEdit->setValidator(valid); // set the validator for the lineEdit element intended for input data entry
     ui->lineEdit_2->setValidator(valid);
 }
 
 
-// Обратите внимание на то, что исходная строка автоматически передается слоту:
+// Note that the original string is automatically passed to the slot:
 QString SetofSymbols(QString str)
 {
-    QString strRez = ""; // строка для вывода
-    QList<QChar> rez; // список символов для создания множества
+    QString strRez = ""; // string for output
+    QList<QChar> rez; // list of characters to create a set
     for (int i = 0; i<str.length(); ++i)
     {
-    // перебираем все символы исходной строки
+    // search through all characters of the source string
         if (!rez.contains(str[i]))
         {
-    // если символ не содержится во множестве
+    // if the symbol is not contained in the set
             rez << str[i];
         }
-    }// добавляем его в список
-    qSort(rez); // сортируем список
+    }// add it to the list
+    qSort(rez); // sort the list
 
-    foreach(QChar ch, rez) // каждый символ списка добавляем в строку
+    foreach(QChar ch, rez) // add each character in the list to the string
         strRez += ch;
-    //ui->lineEdit_3->setText(strRez); // выводим результат
+
     return strRez;
 }
 
