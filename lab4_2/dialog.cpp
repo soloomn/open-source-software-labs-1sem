@@ -8,10 +8,10 @@ Dialog::Dialog(QWidget *parent)
 {
     ui->setupUi(this);
     QRegExp reg(("[a-zA-Z, ]+"));
-    // регулярное выражение, описывающее набор допустимых символов
+    // regular expression describing a set of valid characters
     QRegExpValidator* valid = new QRegExpValidator(reg, this);
-    // объявляем указатель на объект валидатор, использующий регулярное выражение
-    ui->lineEdit->setValidator(valid); /* устанавливаем валидатор для элемента lineEdit, предназначенного для ввода исходных данных */
+    // declare a pointer to a validator object that uses a regular expression
+    ui->lineEdit->setValidator(valid); // set the validator for the lineEdit element intended for input data entry
     ui->lineEdit_2->setValidator(valid);
 }
 
@@ -36,7 +36,7 @@ void Dialog::on_pushButton_clicked()
         }
     }
     qSort(rez);
-    foreach(QChar ch, rez) // каждый символ списка добавляем в строку
+    foreach(QChar ch, rez) // add each character in the list to the string
         rezstr += ch;
 
     ui->lineEdit_3->setText(rezstr);
