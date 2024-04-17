@@ -1,0 +1,2 @@
+Develop a program that draws circles with the mouse (the circle is visible during the drawing process). The drawn circles can be saved in a file and loaded from a file.
+
