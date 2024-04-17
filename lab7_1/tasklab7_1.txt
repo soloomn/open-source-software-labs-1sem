@@ -1,0 +1,1 @@
+Develop a program that draws mouse trajectories in the selected color when the left button is pressed and erases the drawing when the right button is clicked.
