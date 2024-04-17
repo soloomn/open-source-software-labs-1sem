@@ -1,0 +1,2 @@
+Write a program with a window of type QMainWindow that reads text from a file, displays it on the screen, and counts how many times a given character is contained in the text.  The file name should be read using a special dialog box for opening files. The character should be read using an auxiliary dialog box, which is displayed on the screen when the button on the toolbar is clicked.
+
