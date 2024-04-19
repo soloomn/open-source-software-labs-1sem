@@ -1,0 +1,2 @@
+Develop a program that inscribes an N-gon into a circle. When the vertices are connected, they can be passed in increments of M, e.g. after two or after three. The circle is defined with two mouse clicks (in the center and on the circle). The numbers N and M are read from the keyboard in the main window.
+
