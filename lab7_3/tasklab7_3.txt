@@ -1,0 +1,2 @@
+Create an application that draws painted five-pointed stars (inscribed in an imaginary circle; the center of the circle and one point on the circle are set by mouse clicks).  The color of each star should be determined using a non-modal dialog box with dial counters (Spin) that allow you to set the intensities of the red, green, and blue color components. Provide the ability to save the image to a file and read it from a file.
+
