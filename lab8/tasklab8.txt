@@ -1,0 +1,3 @@
+Create an application that fills a window with several rows of regular 5-gons (convex) and, when you click in a 5-gon, paints it with a color selectable using a non-modal dialog box with set counters (Spin) that allow you to set the intensities of the red, green, and blue components of the color. Provide the ability to save the image to a file and read it from a file.
+Check in which 5-gon the user clicked with the mouse using QRegion areas!
+
