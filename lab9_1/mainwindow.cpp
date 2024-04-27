@@ -8,11 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QScrollArea* scroll = new QScrollArea(this); // создаем область прокрутки
-    Pole* pole = new Pole(scroll);  // создаем новый виджет
-    scroll->setWidget(pole);  // размещаем виджет в области прокрутки
-    setCentralWidget(scroll);  // делаем область прокрутки рабочей областью окна
-    connect(ui->actionOpen, SIGNAL(triggered()), pole, SLOT(fileOpen())); // связываем вызов команды File|Open со слотом, который мы создадим в классе Pole
+    QScrollArea* scroll = new QScrollArea(this); // scroll area
+    Pole* pole = new Pole(scroll);  // create a new widget
+    scroll->setWidget(pole);  // place the widget in the scroll area
+    setCentralWidget(scroll);  // make the scroll area the working area of the window
+    connect(ui->actionOpen, SIGNAL(triggered()), pole, SLOT(fileOpen())); // bind the FileOpen command call to the slot we will create in the Pole class
 }
 MainWindow::~MainWindow()
 {
