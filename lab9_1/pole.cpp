@@ -3,79 +3,88 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-Pole::Pole(QScrollArea* parent) :   // измените тип указателя на родительское окно
+Pole::Pole(QScrollArea* parent) : // change the type of the pointer to the parent window
     QWidget(parent)
 {
-    Parent = parent; // запоминаем значение указателя
+    Parent = parent; // store the pointer value
 }
-void Pole::paintEvent(QPaintEvent *) // отображаем массив на экране:
+void Pole::paintEvent(QPaintEvent *) // display the array on the screen
 {
     QPainter painter(this);
-    int y = 20; // уровень, с которого начинается вывод массива на экран
-    painter.setFont(font); // устанавливаем шрифт
-    // Вывод массива:
-    double sum = 0; // сумма элементтов массива
-    k = v.size(); // размер массива
-    for (int i = 0; i < k; ++i) // проходим по массиву
+    painter.setFont(font); // set the font
+
+    int y = 20; // level from which the array output to the screen starts
+    double sum = 0; // sum of array elements
+
+    k = v.size(); // array size
+
+    for (int i = 0; i < k; ++i) // loop through the array
     {
-        painter.drawText(10, y, QString::number(v[i]));
-// выводим очередной элемент массива на экран
-        y += dy; // переходим на другую строку
-        sum += v[i]; // добавляем элемент к сумме
+        painter.drawText(10, y, QString::number(v[i])); // display the next element of the array
+
+        y += dy; // move to another line
+        sum += v[i]; // add an element to the sum
     }
-    copyV = v;
-// копируем массив, чтобы исходный массив отображался на экране без изменений
-    qSort(copyV.begin(), copyV.end(), qGreater<double>());
- // сортируем копию массива по убыванию, чтобы построить диаграмму
-    // Диаграмма:
-    QRect rectBase = Parent->rect();
- // прямоугольник, соответствующий видимой части области прокрутки
-    QRect rect = rectBase; // прямоугольник, в котором мы будем рисовать диаграмму
-    int h = rectBase.height()-25; // несколько уменьшим высоту прямоугольника
-    rect.setSize(QSize(h,h)); // задаем квадрат высотой h
-    rect.moveRight(rectBase.width()-25); // перемещаем квадрат к правой границе окна
-    double startAngle = 0; // начальный угол для первого фрагмента диаграммы
-    double spanAngle = 0; // угол,
-    for (int i = 0; i < qMin(13, k); ++i) //
+
+    copyV = v; // copy the array so that the original array is displayed on the screen without changes
+    qSort(copyV.begin(), copyV.end(), qGreater<double>()); // sort the array copy in descending order to build the diagram
+
+    QRect rectBase = Parent->rect(); // rectangle corresponding to the visible part of the scroll area
+    QRect rect = rectBase; // rectangle in which we will draw the diagram
+
+    int h = rectBase.height()-25; // slightly reduce the height of the rectangle
+    double startAngle = 0; // initial angle for the first fragment of the diagram
+    double spanAngle = 0;
+
+    rect.setSize(QSize(h,h)); // define a square with height h
+    rect.moveRight(rectBase.width()-25); // move the square to the right border of the window
+
+
+    for (int i = 0; i < qMin(13, k); ++i)
     {
-        spanAngle = 360 * 16.* copyV[i] / sum ; // Угол между радиусами
-        Pie(painter, rect, startAngle, spanAngle, i);
-// рисуем сектор с помощью функции, определенной ниже
-        startAngle += spanAngle; // переходим к следующему сектору
+        spanAngle = 360 * 16.* copyV[i] / sum ; // angle between radii
+
+        Pie(painter, rect, startAngle, spanAngle, i); // draw a sector using the function defined below
+        startAngle += spanAngle; // move on to the next sector
     }
-    if (k > 13) // отображаем остальные элементы массива в сумме:
+
+    if (k > 13) // display the other elements of the array in the sum
     {
-        spanAngle = 360*16 - startAngle; // определяем размер соответствующего угла
-        Pie(painter, rect, startAngle, spanAngle, 13);
-// рисуем оставшуюся часть диаграммы
+        spanAngle = 360*16 - startAngle; // determine the size of the corresponding angle
+
+        Pie(painter, rect, startAngle, spanAngle, 13); // draw the rest of the diagram
     }
 }
 void Pole::fileOpen()
 {
     if (file.isOpen()) file.close();
-    v.clear(); // удаляем ранее считанный массив
-    copyV.clear(); // и его копию
-    fileName = QFileDialog::getOpenFileName(this, "Открыть файл", QString("/Users/tim/documents/programming/open-source-software-labs-2sem/lab9_1"),
-               QString("Текстовые файлы (*.txt);;Все файлы (*.*)"));
- // считываем имя файла с помощью специального окна
-    if (!fileName.isEmpty()) // если имя файла выбрано
+
+    v.clear(); // delete the previously read array
+    copyV.clear(); // and a copy of it
+
+    fileName = QFileDialog::getOpenFileName(this, "Open a file", QString("/Users/tim/documents/programming/open-source-software-labs-2sem/lab9_1"),
+               QString("Text files (*.txt);;All files (*.*)")); // read the file name using a special window
+
+    if (!fileName.isEmpty()) // if the file name is selected
     {
-        file.setFileName(fileName);
-// связываем объект файл с физическим файлом на диске
-        file.open(QIODevice::ReadOnly); // открываем файл
-        QTextStream in(&file); // создаем поток для работы с файлами
-        double x; // одно число из файла
-        while (true) // как бы бесконечный цикл для чтения данных из файла
+        file.setFileName(fileName); // link the file object to a physical file on disk
+        file.open(QIODevice::ReadOnly); // open the file
+
+        QTextStream in(&file); // create a thread for working with files
+
+        double x; // single number from the file
+
+        while (true) // like an infinite loop to read data from a file
         {
-            in >> x; // считываем одно число
-            if (x < 0) // если число недопустимо
+            in >> x; // read out one number
+            if (x < 0) // if the number is invalid
             {
-                QMessageBox::critical(this, "Ошибка в данных",
-                                      "Все числа должны быть больше 0");
+                QMessageBox::critical(this, "Data error",
+                                      "All numbers must be greater than 0");
                 return;
             }
-            if (!in.atEnd()) // если файл не закончен
-                v << x; // записываем число
+            if (!in.atEnd()) // if the file is incomplete
+                v << x; // write the number
             else break; //
         }
         font = QFont("Serif", 12); //
