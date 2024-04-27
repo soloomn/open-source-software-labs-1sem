@@ -1,0 +1,2 @@
+Develop a program that reads an array of non-negative numbers from a file, displays it on the screen using scroll bars, and draws a pie chart for the 13 largest elements, displaying the rest as a total.
+
