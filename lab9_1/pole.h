@@ -8,19 +8,19 @@ class Pole : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Pole(QScrollArea* parent = 0); // измените тип указателя на родительское окно
-    QScrollArea* Parent; // указатель на область прокрутки
-    void paintEvent(QPaintEvent *); // перерисовывает содержимое окна
-    QFile file; // файл, содержащий массив
-    QString fileName; // имя файла
-    QVector<double> v; // массив
-    QVector<double> copyV; // копия массива
-    QFont font; // шрифт
-    int dy; // расстояние между элементами массива при выводе на экран
-    int k; // количество элементов массива
-    void Pie(QPainter&, QRect&, int, int, int); // рисует один кусок диаграммы
+    explicit Pole(QScrollArea* parent = 0); // change the type of the pointer to the parent window
+    QScrollArea* Parent; // scroll area pointer
+    void paintEvent(QPaintEvent *); // redraws the window contents
+    QFile file; // file containing an array
+    QString fileName; // file name
+    QVector<double> v; // array
+    QVector<double> copyV; // copy of array
+    QFont font; // font
+    int dy; // distance between array elements when displaying on the screen
+    int k; // number of array elements
+    void Pie(QPainter&, QRect&, int, int, int); // draws one piece of the diagram
 signals:
 public slots:
-    void fileOpen(); // слот, считывающий массив из файла
+    void fileOpen(); // slot that reads an array from a file
 };
 #endif // POLE_H
